@@ -10,8 +10,9 @@ COPY requirements.txt .
 # Install the Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code into the container
+# Copy the entire directory into the container, excluding the .git directory
 COPY . .
+RUN find /app -type d -name ".git" -exec rm -rf {} +
 
 EXPOSE 5000
 
